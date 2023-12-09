@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>password Checker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <style>
+    .tile-container{
+      margin-left: 200px;
+      border: 2px solid black;
+      border-radius: 10px;
+      background-color: rgb(192, 248, 248);
+      padding: 10px;
+      width: 600px;
+      height: 400px;
+      text-align: center;
+    }
+.weak-password{
+   color: red;
+}
+  .medium-password{
+    color: yellow;
+  }
+  .strong-password{
+    color: green;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="natwar-container tile-container">
+    <h2 class="text-center">Password Strength Checker</h2><br><br>
+    <form>
+      <div class="row">
+        <label>Password:</label> <input type="password" name="password" id="password" class="full-width"
+          onkeyup="checkPasswordStrength();" />
+      </div><br><br>
+      <div id="password-strength-status"></div>
+    </form>
+  </div>
+
+
+  <script>
+    function checkPasswordStrength() {
+      var number = /([0-8])/;
+      var alphabets = /([a-zA-Z])/;
+      var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+      var password = $('#password').val().trim();
+
+      if (password.length < 8) {
+        $('#password-strength-status').removeClass();
+        $('#password-strength-status').addClass('weak-password');
+        $('#password-strength-status').html("Weak ");
+
+      } else {
+        if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+          $('#password-strength-status').removeClass();
+          $('#password-strength-status').addClass('strong-password');
+          $('#password-strength-status').html("Strong");
+        }
+
+        else {
+          $('#password-strength-status').removeClass();
+          $('#password-strength-status').addClass('medium-password');
+          $('#password-strength-status').html("Medium ");
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
